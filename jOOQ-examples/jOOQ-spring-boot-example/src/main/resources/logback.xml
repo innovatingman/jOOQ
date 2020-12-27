@@ -22,9 +22,12 @@
         </rollingPolicy>
     </appender>
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
+
+    <logger name="org.jooq" level="debug"/>
+    <logger name="org.springframework.jdbc.support.JdbcTransactionManager" level="debug"/>
 
 </configuration>
