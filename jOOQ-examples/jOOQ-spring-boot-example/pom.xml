@@ -25,6 +25,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>org.jooq.example.spring.Application</start-class>
         <java.version>1.8</java.version>
+
+        <spring.datasource.driverClassName>org.h2.Driver</spring.datasource.driverClassName>
+        <spring.datasource.url>jdbc:h2:~/jooq-spring-boot-example</spring.datasource.url>
+        <spring.datasource.username>sa</spring.datasource.username>
+        <spring.datasource.password></spring.datasource.password>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
@@ -70,6 +76,18 @@
             <version>${spring.boot.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- log -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -106,7 +124,6 @@
 
                 <configuration>
                     <skip>${maven.test.skip}</skip>
-                    <forkMode>always</forkMode>
                 </configuration>
 
                 <executions>

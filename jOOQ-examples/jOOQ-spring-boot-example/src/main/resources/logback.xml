@@ -1,5 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <logger name="org.jooq" level="DEBUG"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss}] %-5level\(%class{0}:%line\) - [%logger{96}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/opt/tomcat8/logs/logapps/jooq-spring-boot-example.log</file>
+        <encoder>
+            <pattern>
+                [%date{yyyy-MM-dd HH:mm:ss}] %-5level\(%class{0}:%line\) - [%logger{96}] - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/opt/tomcat8/logs/logapps/logapps/jooq-spring-boot-example_%d{yyyyMMdd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
 </configuration>
