@@ -121,11 +121,19 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sql-maven-plugin</artifactId>
-
                 <configuration>
                     <skip>${maven.test.skip}</skip>
-                </configuration>
+                    <driver>${spring.datasource.driverClassName}</driver>
+                    <url>${spring.datasource.url}</url>
+                    <username>${spring.datasource.username}</username>
+                    <password>${spring.datasource.password}</password>
 
+                    <autocommit>true</autocommit>
+                    <srcFiles>
+                        <srcFile>src/main/resources/schema-h2.sql</srcFile>
+                        <srcFile>src/main/resources/data-h2.sql</srcFile>
+                    </srcFiles>
+                </configuration>
                 <executions>
                     <execution>
                         <id>create-database-h2</id>
@@ -133,18 +141,7 @@
                         <goals>
                             <goal>execute</goal>
                         </goals>
-                        <configuration>
-                            <driver>${spring.datasource.driverClassName}</driver>
-                            <url>${spring.datasource.url}</url>
-                            <username>${spring.datasource.username}</username>
-                            <password>${spring.datasource.password}</password>
 
-                            <autocommit>true</autocommit>
-                            <srcFiles>
-                                <srcFile>src/main/resources/schema-h2.sql</srcFile>
-                                <srcFile>src/main/resources/data-h2.sql</srcFile>
-                            </srcFiles>
-                        </configuration>
                     </execution>
                 </executions>
 
@@ -161,7 +158,31 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-
+                <configuration>
+                    <jdbc>
+                        <driver>${spring.datasource.driverClassName}</driver>
+                        <url>${spring.datasource.url}</url>
+                        <user>${spring.datasource.username}</user>
+                        <password>${spring.datasource.password}</password>
+                    </jdbc>
+                    <generator>
+                        <database>
+                            <name>org.jooq.meta.h2.H2Database</name>
+                            <includes>.*</includes>
+                            <excludes></excludes>
+                            <inputSchema>PUBLIC</inputSchema>
+                        </database>
+                        <generate>
+                            <deprecated>false</deprecated>
+                            <instanceFields>true</instanceFields>
+                            <pojos>true</pojos>
+                        </generate>
+                        <target>
+                            <packageName>org.jooq.example.db.h2</packageName>
+                            <directory>target/generated-sources/jooq-h2</directory>
+                        </target>
+                    </generator>
+                </configuration>
                 <executions>
                     <execution>
                         <id>generate-h2</id>
@@ -169,31 +190,7 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <configuration>
-                            <jdbc>
-                                <driver>${spring.datasource.driverClassName}</driver>
-                                <url>${spring.datasource.url}</url>
-                                <user>${spring.datasource.username}</user>
-                                <password>${spring.datasource.password}</password>
-                            </jdbc>
-                            <generator>
-                                <database>
-                                    <name>org.jooq.meta.h2.H2Database</name>
-                                    <includes>.*</includes>
-                                    <excludes></excludes>
-                                    <inputSchema>PUBLIC</inputSchema>
-                                </database>
-                                <generate>
-                                    <deprecated>false</deprecated>
-                                    <instanceFields>true</instanceFields>
-                                    <pojos>true</pojos>
-                                </generate>
-                                <target>
-                                    <packageName>org.jooq.example.db.h2</packageName>
-                                    <directory>target/generated-sources/jooq-h2</directory>
-                                </target>
-                            </generator>
-                        </configuration>
+
                     </execution>
                 </executions>
             </plugin>
