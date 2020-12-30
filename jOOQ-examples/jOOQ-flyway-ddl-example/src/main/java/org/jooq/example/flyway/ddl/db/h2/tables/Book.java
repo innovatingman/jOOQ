@@ -96,7 +96,7 @@ public class Book extends TableImpl<BookRecord> {
 
     @Override
     public Schema getSchema() {
-        return FlywayTest.FLYWAY_TEST;
+        return aliased() ? null : FlywayTest.FLYWAY_TEST;
     }
 
     @Override
@@ -109,8 +109,13 @@ public class Book extends TableImpl<BookRecord> {
         return Arrays.<ForeignKey<BookRecord, ?>>asList(Keys.FK_T_BOOK_AUTHOR_ID);
     }
 
+    private transient Author _author;
+
     public Author author() {
-        return new Author(this, Keys.FK_T_BOOK_AUTHOR_ID);
+        if (_author == null)
+            _author = new Author(this, Keys.FK_T_BOOK_AUTHOR_ID);
+
+        return _author;
     }
 
     @Override
