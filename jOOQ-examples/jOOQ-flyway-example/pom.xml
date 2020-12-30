@@ -66,6 +66,13 @@
             <artifactId>scalatest_2.12</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.11.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -131,6 +138,7 @@
                             <generator>
                                 <database>
                                     <includes>.*</includes>
+                                    <!-- The DB schema FLYWAY_TEST produced by flyway automatically-->
                                     <inputSchema>FLYWAY_TEST</inputSchema>
                                     <catalogVersionProvider>SELECT :schema_name || '_' || MAX("version") FROM "schema_version"</catalogVersionProvider>
                                     <schemaVersionProvider>SELECT :schema_name || '_' || MAX("version") FROM "schema_version"</schemaVersionProvider>
