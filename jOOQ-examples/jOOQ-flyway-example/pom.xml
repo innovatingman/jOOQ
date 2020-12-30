@@ -138,7 +138,6 @@
                             <generator>
                                 <database>
                                     <includes>.*</includes>
-                                    <!-- The DB schema FLYWAY_TEST produced by flyway automatically-->
                                     <inputSchema>FLYWAY_TEST</inputSchema>
                                     <catalogVersionProvider>SELECT :schema_name || '_' || MAX("version") FROM "schema_version"</catalogVersionProvider>
                                     <schemaVersionProvider>SELECT :schema_name || '_' || MAX("version") FROM "schema_version"</schemaVersionProvider>
