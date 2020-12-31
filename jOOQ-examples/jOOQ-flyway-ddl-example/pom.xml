@@ -69,31 +69,31 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
+
+                        <configuration>
+                            <generator>
+                                <database>
+                                    <name>org.jooq.meta.extensions.ddl.DDLDatabase</name>
+                                    <inputSchema>FLYWAY_TEST</inputSchema>
+                                    <properties>
+                                        <property>
+                                            <key>sort</key>
+                                            <value>flyway</value>
+                                        </property>
+                                        <property>
+                                            <key>scripts</key>
+                                            <value>${basedir}/src/main/resources/db/migration/*</value>
+                                        </property>
+                                    </properties>
+                                </database>
+                                <target>
+                                    <packageName>org.jooq.example.flyway.ddl.db.h2</packageName>
+                                    <directory>src/main/java</directory>
+                                </target>
+                            </generator>
+                        </configuration>
                     </execution>
                 </executions>
-
-                <configuration>
-                    <generator>
-                        <database>
-                            <name>org.jooq.meta.extensions.ddl.DDLDatabase</name>
-                            <inputSchema>FLYWAY_TEST</inputSchema>
-                            <properties>
-                                <property>
-                                    <key>sort</key>
-                                    <value>flyway</value>
-                                </property>
-                                <property>
-                                    <key>scripts</key>
-                                    <value>${basedir}/src/main/resources/db/migration/*</value>
-                                </property>
-                            </properties>
-                        </database>
-                        <target>
-                            <packageName>org.jooq.example.flyway.ddl.db.h2</packageName>
-                            <directory>src/main/java</directory>
-                        </target>
-                    </generator>
-                </configuration>
             </plugin>
         </plugins>
     </build>
