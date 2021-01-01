@@ -23,10 +23,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <db.driver>org.h2.Driver</db.driver>
-        <db.url>jdbc:h2:~/jooq-spring-boot-example</db.url>
+        <db.url>jdbc:h2:~/jooq-spring-example</db.url>
         <db.username>sa</db.username>
-        <db.password></db.password><maven.test.skip>true</maven.test.skip>
-        <maven.test.skip>true</maven.test.skip>
+        <db.password></db.password>
+        <maven.test.skip>false</maven.test.skip>
     </properties>
 
     <dependencies>
